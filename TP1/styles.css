@@ -1,0 +1,345 @@
+html {
+  font-size: 10px;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  color: #333333;
+  background-color: #DDDDDD;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+#navbarPrincipal {
+  padding-right: 0;
+  padding-left: 0;
+  background-color: #D4707A;
+  border-radius: 0;
+  z-index: 1000;
+  border-width: 0 0 1px;
+  position: relative;
+  min-height: 50px;
+  border: 1px solid transparent;
+  display: block;
+  margin-bottom: 5px;
+}
+
+#navbarPrincipal > #navContainerPrincipal {
+  width: 1170px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#navBarHeader {
+  margin-right: 0;
+  margin-left: 0;
+  float: left;
+  box-sizing: border-box;
+}
+
+#navBarBody {
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: 0;
+  padding-left: 0;
+  display: block!important;
+  height: auto!important;
+  padding-bottom: 0;
+  overflow: visible!important;
+  visibility: visible!important;
+  width: auto;
+  border-top: 0;
+  box-shadow: none;
+}
+
+#unOrderListNav {
+  float: left;
+  margin: 0;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  display: block!important;
+  height: auto!important;
+  padding-bottom: 0;
+  overflow: visible!important;
+  visibility: visible!important;
+}
+
+#unOrderListNav > li {
+  float: left;
+  position: relative;
+  display: block;
+  text-align: -webkit-match-parent;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  display: block!important;
+  height: auto!important;
+  padding-bottom: 0;
+  overflow: visible!important;
+  visibility: visible!important;
+}
+
+#unOrderListNav > li > a {
+  float: none;
+  text-transform: uppercase;
+  padding: 16px 15px 16px 12px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: none;
+  position: relative;
+  display: block;
+  line-height: 20px;
+  background-color: transparent;
+}
+
+h1 {
+  margin: 0 0 0 0;
+  font-size: 36px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
+
+h1 > a {
+  font-family: 'Capriola', sans-serif;
+  display: block;
+  float: left;
+  font-size: 22px;
+  font-weight: 200;
+  line-height: 1;
+  color: white;
+  text-decoration: none;
+  height: 50px;
+  padding: 0px 15px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#containerPrincipalDamas {
+  width: 1170px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: border-box;
+  display: block;
+}
+
+#breadcrumb {
+  padding: 4px 15px;
+  margin: 0 0 15px 0;
+  list-style: none;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+#breadcrumb > li {
+  display: inline-block;
+}
+
+#breadcrumb > li > a {
+  color: #1E5096;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.activeLi {
+  color: #777;
+}
+
+#breadcrumb>li+li:before {
+  padding: 0 5px;
+  color: #ccc;
+  content: "/\00a0";
+}
+
+.tableLayout::before {
+  display: table;
+  content: " ";
+}
+
+.clearBothClass {
+  clear: both;
+  display: table;
+  content: " ";
+}
+
+#breadcrumb > li > a:hover, #breadcrumb > li > a:focus {
+  color: #23527c;
+  text-decoration: underline;
+  outline: 0;
+}
+
+#rowTableContainer {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col-md-12 {
+  width: 100%;
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  display: block;
+}
+
+#contenedorDamas {
+  width: 480px;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#tableroDamas {
+  border: 5px solid #999999;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 0;
+  margin-top: 30px;
+  height: 480px;
+}
+
+.celda{
+  height: 60px;
+  width: 60px;
+  float: left;
+}
+
+.celdaBlanca {
+  background: -webkit-gradient(linear,center bottom,center top,from(#ffffff),to(#eeeeee));
+  background-color: white;
+}
+
+.celdaNegra {
+  background: -webkit-gradient(linear,center bottom,center top,from(#333333),to(#222222));
+}
+
+.ficha {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+}
+
+#tableroDamas .roja {
+  background-image: url(PieceRed.png);
+}
+
+#tableroDamas .blanca {
+  background-image: url(PieceWhite.png);
+}
+
+#buttonContainer {
+  margin-bottom: 10px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+#newGameButton {
+  background: -webkit-gradient(linear,center bottom,center top,from(#3d94d1),to(#57aeea));
+  background-color: lightBlue;
+  display: inline-block;
+  font-size: 21px;
+  margin-top: 20px;
+  padding: 10px 45px;
+  vertical-align: middle;
+  font-family: Arial;
+  color: #fff;
+  border: 1px solid #84C5F3;
+  text-shadow: 0 0 3px #333333;
+  cursor: pointer;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 0 8px 1px #888888;
+  -webkit-border-radius: 12px;
+}
+
+.fondoGris{
+  margin: 20px 0 10px 0;
+  padding: 10px;
+  border-radius: 4px;
+  background: #efefef;
+}
+
+.fondoGris > p {
+  margin: 0 0 10px;
+}
+
+.selected {
+  background-color: #074F7F;
+  -webkit-box-shadow: 0 0 10px 7px #5AADE6;
+}
+
+.errorSelected {
+  background-image: url(notAllowed.png) !important;
+  -webkit-box-shadow: 0 0 10px 7px red;
+}
+
+#footer {
+  padding: 19px 14px;
+  margin-top: 40px;
+  border-top: 1px solid #CAC3C3;
+  background-color: white;
+  display: block;
+}
+
+#containerFooter {
+  width: 1170px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.col-md-7 {
+  width: 58.33333333%;
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: left;
+}
+
+#footerParragraph {
+  margin-bottom: 0;
+  color: #777;
+  padding: 11px;
+  font-size: 12px;
+  margin: 0 0 10px;
+}
+
+#footerParragraph > a {
+  color: #1E5096;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+h2 {
+  font-size: 30px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+}
