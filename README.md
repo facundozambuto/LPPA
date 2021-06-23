@@ -1,6 +1,8 @@
 # LENGUAJES DE PROGRAMACIÓN PARA LA ADMINISTRACIÓN 
 
-Trabajo práctico "Mini Damas"
+Trabajo práctico "Mini Damas". 
+
+Para acceder: https://facundozambuto.github.io/LPPA/TP1/index.html 📌
 
 ## Consignas 📋
 
