@@ -4,6 +4,8 @@ Trabajo práctico "Mini Damas".
 
 Para acceder: https://facundozambuto.github.io/LPPA/TP1/index.html 📌
 
+![Alt Text](https://media.giphy.com/media/kTHvm5ZApOvcAin3G4/giphy.gif)
+
 ## Consignas 📋
 
 Continuar el proyecto desarrollado en el Trabajo Practico N1, agregandole las primeras reglas del juego de Damas. El objetivo de esta semana es poder seleccionar fichas por turno, es decir que se debe detectar el jugador actual, y solo se pueden seleccionar casilleros correspondientes al color de ficha de dicho jugador. No es necesario crear reglas de movimiento de fichas diagonales, solo turnos.
