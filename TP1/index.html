@@ -7,6 +7,7 @@
         <meta name="Description" content="trabajo practico uai lppa">
         <link rel="stylesheet" href="styles.css" type="text/css">
         <script type="text/javascript" src="damas.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
     </head>
     <body>
         <nav id="navbarPrincipal" class="tableLayout" role="navigation">
@@ -35,11 +36,27 @@
                                 
                             </div>
                             <div id="buttonContainer" class="text-center">
-                                <div id="newGameButton">
+                                <div id="newGameButton" onClick="window.location.reload();">
                                     Nueva partida
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="jugadorUno">
+                <div class="col-md-12 borderTurnoPadre">
+                    <div class="fondoGris borderTurnoUno">
+                        <strong>TURNO JUGADOR UNO</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" id="jugadorDos">
+                <div class="col-md-12 borderTurnoPadre">
+                    <div class="fondoGris borderTurnoDos">
+                        <strong>TURNO JUGADOR DOS</strong>
                     </div>
                 </div>
             </div>

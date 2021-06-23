@@ -343,3 +343,73 @@ h2 {
   line-height: 1.1;
   color: inherit;
 }
+
+#jugadorUno {
+  text-align: center;
+}
+
+#jugadorDos {
+  text-align: center;
+  display: none;
+}
+
+.borderTurnoPadre {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.borderTurnoUno {
+  position: relative;
+  border: 0;
+  height: 20rem;
+  width: 20rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: lightblue;
+  color: blue
+}
+
+.borderTurnoDos {
+  position: relative;
+  border: 0;
+  height: 20rem;
+  width: 20rem;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: lightcoral;
+  color: white
+}
+
+.borderTurnoUno:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 100%;
+  border: 2px dashed blue;
+  animation: rotate 10s linear infinite;
+}
+
+.borderTurnoDos:before {
+  content: " ";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 100%;
+  border: 2px dashed red;
+  animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}
