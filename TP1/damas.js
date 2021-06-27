@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     localStorage.setItem("turno", "jugadorUno");
 
+    localStorage.setItem("tablaDePosiciones", JSON.stringify([{'jugador': 1, 'puntos': 0}, {'jugador': 2, 'puntos': 0}]));
 
     //Renderiza el tablero
     for(i=0; i<8; i++) {
@@ -37,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     ficha.classList.add('roja');
                     ficha.style.setProperty("top", i * 60 + 'px');
                     ficha.style.setProperty("left", j == 0 ? 0 + 'px' : j * 60 +'px');
+                    ficha.setAttribute('fila', i*60);
+                    ficha.setAttribute('columna', j == 0 ? 0  : j * 60);
                     document.getElementById('tableroDamas').appendChild(ficha);
                 }
 
@@ -46,6 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     ficha.classList.add('blanca');
                     ficha.style.setProperty("top", i == 0 ? '0px' : i * 60 + 'px');
                     ficha.style.setProperty("left", j * 60 + 'px');
+                    ficha.setAttribute('fila', i == 0 ? 0 : i * 60);
+                    ficha.setAttribute('columna', j * 60);
                     document.getElementById('tableroDamas').appendChild(ficha);
                 }
             }
@@ -150,13 +155,20 @@ document.addEventListener('DOMContentLoaded', function() {
             if (targetElement) {
                 if (!this.classList.contains('roja') && !this.classList.contains('blanca')) {
                     if (this.attributes['ocupada'].value == 'false') {
-                        alert('CAMBIO DE TURNO');
-                        localStorage.setItem("turno", "jugadorDos");
-                        targetElement.classList.remove('selected');
-                        const jugadorUno = document.getElementById('jugadorUno');
-                        const jugadorDos = document.getElementById('jugadorDos');
-                        jugadorUno.style.display = 'none';
-                        jugadorDos.style.display = 'block';
+                        if (realizarMovimiento(parseInt(targetElement.attributes['fila'].value), 
+                                            parseInt(targetElement.attributes['columna'].value), 
+                                            parseInt(this.attributes['fila'].value), 
+                                            parseInt(this.attributes['columna'].value), 
+                                            'blanca')) {
+                            localStorage.setItem("turno", "jugadorDos");
+                            targetElement.classList.remove('selected');
+                            const jugadorUno = document.getElementById('jugadorUno');
+                            const jugadorDos = document.getElementById('jugadorDos');
+                            jugadorUno.style.display = 'none';
+                            jugadorDos.style.display = 'block';
+                            
+                            validarGanador();
+                        }
                     }
                 }
             }
@@ -166,13 +178,20 @@ document.addEventListener('DOMContentLoaded', function() {
             if (targetElement) {
                 if (!this.classList.contains('roja') && !this.classList.contains('blanca')) {
                     if (this.attributes['ocupada'].value == 'false') {
-                        alert('CAMBIO DE TURNO');
-                        localStorage.setItem("turno", "jugadorUno");
-                        targetElement.classList.remove('selected');
-                        const jugadorUno = document.getElementById('jugadorUno');
-                        const jugadorDos = document.getElementById('jugadorDos');
-                        jugadorUno.style.display = 'block';
-                        jugadorDos.style.display = 'none';
+                        if (realizarMovimiento(parseInt(targetElement.attributes['fila'].value), 
+                                            parseInt(targetElement.attributes['columna'].value), 
+                                            parseInt(this.attributes['fila'].value), 
+                                            parseInt(this.attributes['columna'].value), 
+                                            'roja')) {
+                            localStorage.setItem("turno", "jugadorUno");
+                            targetElement.classList.remove('selected');
+                            const jugadorUno = document.getElementById('jugadorUno');
+                            const jugadorDos = document.getElementById('jugadorDos');
+                            jugadorUno.style.display = 'block';
+                            jugadorDos.style.display = 'none';
+
+                            validarGanador();
+                        }
                     }
                 }
             }
@@ -185,3 +204,88 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 }, false);
+
+function realizarMovimiento(filaFicha, columnaFicha, filaCelda, columnaCelda, colorFicha) {
+     if (esDeAvance(filaFicha, filaCelda, colorFicha)) {
+        if (estaComiendo(columnaFicha, columnaCelda, filaFicha, filaCelda, colorFicha) || esValido(columnaFicha, columnaCelda)) {
+            var ficha = document.querySelectorAll('div.ficha.' + colorFicha + '[columna=' + '"' + columnaFicha + '"' + '][fila=' + '"' + filaFicha + '"' + ']');
+            celdaActual = document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaFicha + '"' + '][fila=' + '"' + filaFicha + '"' + ']');
+            celdaActual[0].attributes["ocupada"].value = false;
+            celdaNueva = document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaCelda + '"' + '][fila=' + '"' + filaCelda + '"' + ']');
+            celdaNueva[0].attributes["ocupada"].value = true;
+            ficha[0].attributes["columna"].value = columnaCelda;
+            ficha[0].attributes["fila"].value = filaCelda;
+            ficha[0].style.setProperty("top", filaCelda + 'px');
+            ficha[0].style.setProperty("left", columnaCelda + 'px');
+
+            return true;
+        }
+        return false
+    }
+    return false;
+}
+
+function esDeAvance(filaFicha, filaCelda, colorFicha) {
+    if (colorFicha === 'blanca') {
+        if (filaFicha < filaCelda) {
+            return true
+        }
+    } else if (colorFicha === 'roja') {
+        if (filaFicha > filaCelda) {
+            return true
+        }
+    }
+    return false;
+}
+
+function esValido(columnaFicha, columnaCelda) {
+    if (columnaFicha + 60 == columnaCelda || columnaFicha - 60 == columnaCelda) {
+        return true;
+    }
+    return false;
+}
+
+function estaComiendo(columnaFicha, columnaCelda, filaFicha, filaCelda, colorFicha) {
+    if (columnaFicha + 120 == columnaCelda || columnaFicha - 120 == columnaCelda) {
+        var colorFichaRival = colorFicha === 'blanca' ? 'roja' : 'blanca';
+        filaCelda = colorFicha === 'blanca' ? filaCelda - 60 : filaCelda + 60;
+        
+        columnaCelda = columnaFicha + 120 === columnaCelda ? columnaCelda - 60 : columnaCelda + 60;
+
+        var ficha = document.querySelectorAll('div.ficha.' + colorFichaRival + '[columna=' + '"' + columnaCelda + '"' + '][fila=' + '"' + filaCelda + '"' + ']');
+
+        if (ficha.length > 0) {
+            celdaFichaComida = document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaCelda + '"' + '][fila=' + '"' + filaCelda + '"' + ']');
+            celdaFichaComida[0].attributes["ocupada"].value = false;
+            actualizarPosiciones(colorFicha)
+            ficha[0].remove();
+
+            return true;
+        }
+    }
+    return false;
+}
+
+function actualizarPosiciones(colorFicha) {
+    var tablero = JSON.parse(localStorage.getItem('tablaDePosiciones'));
+
+    var nroJugador = colorFicha === 'blanca' ? 1 : 2;
+
+    tablero.forEach(x => {
+        if (x.jugador === nroJugador) {
+            x.puntos = x.puntos + 1;
+        }
+    });
+
+    localStorage.setItem("tablaDePosiciones", JSON.stringify(tablero));
+}
+
+function validarGanador() {
+    var tablero = JSON.parse(localStorage.getItem('tablaDePosiciones'));
+
+    tablero.forEach(x => {
+        if (x.puntos === 12) {
+            alert('GANADOR JUGADOR ' + x.jugador);
+        }
+    });
+}
