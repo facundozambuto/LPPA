@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head> 
+        <title>Mini Damas</title> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="Description" content="trabajo practico uai lppa">
+        <link rel="stylesheet" href="styles.css" type="text/css">
+        <script type="text/javascript" src="formContact.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script type='text/javascript' src='//code.jquery.com/jquery-1.9.1.js'></script>
+        <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
+        <script type='text/javascript' src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    </head>
+    <body>
+        <nav id="navbarPrincipal" class="tableLayout" role="navigation">
+            <div id="navContainerPrincipal" class="tableLayout">
+                <div id="navBarHeader" class="tableLayout clearBothClass">
+                    <h1><a class="" href="http://www.minidamas.com">Mini Damas</a></h1>
+                </div>
+                <div id="navBarBody" class="">
+                    <ul id="unOrderListNav">
+                        <li><a href="http://www.minidamas.com" title="Damas online">Damas</a></li>
+                        <li><a href="/que-son-las-damas.php" title="Qué son las damas">¿Qué es?</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="containerPrincipalFormularioContacto" class="tableLayout clearBothClass">
+            <ul id="breadcrumb"  class="">
+                <li><a href="/">Mini Damas</a></li>
+                <li class="activeLi">Contacto</li>
+            </ul>
+            <div class="container">
+                <form id="contactForm">
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="nombre">Nombre</label>
+                        </div>
+                        <div class="col-75">
+                            <input type="text" id="nombre" name="nombre" placeholder="Ej: Juan Pérez" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="email">Email</label>
+                        </div>
+                        <div clss="col-75">
+                            <input type="email" id="email" name="email" placeholder="Ej: juanperez@gmail.com" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-25">
+                            <label for="comentario">Comentario</label>
+                        </div>
+                        <div class="col-75">
+                            <textarea id="comentario" name="comentario" placeholder="Escriba su comentario aquí" style="height:200px" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <input type="submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer id="footer" class="tableLayout clearBothClass">
+            <div id="containerFooter" class="tableLayout clearBothClass">
+                <div class="row">
+                    <div class="col-md-7">
+                    <p id="footerParragraph"><strong>minidamas.com 2021</strong> - Juega a las damas online - <a href="/contacto.php">Contacto</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
