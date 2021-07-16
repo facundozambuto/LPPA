@@ -1,5 +1,7 @@
-document.addEventListener('DOMContentLoaded', function() { 
+document.addEventListener('DOMContentLoaded', function() {
     $('#contactForm').on('submit', function (e) {
+		$('#dimScreen').show();
+		$('#spinner').show();
         if (!e.isDefaultPrevented()) {
             var url = "http://www.partypicapp.com/formContact.php";
 
@@ -12,41 +14,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     var parsedResponse = JSON.parse(data);
                     
                     var messageText = parsedResponse.message;
-                    
-                    $('#contactForm')[0].reset();
-
-                    var closeBtn = $('<a href="#" data-rel="back" class="ui-btn-right ui-btn ui-btn-b ui-corner-all ui-btn-icon-notext ui-icon-delete ui-shadow">Close</a>');
-
-                    var content = "<p>" + messageText + "</p>";
-
-                    var popup = $("<div/>", {
-                        "data-role": "popup"
-                    }).css({
-                        width: $(window).width() / 2.5 + "px",
-                        padding: 5 + "px"
-                    }).append(closeBtn).append(content);
-            
-                    $.mobile.pageContainer.append(popup);
-
-                    $("[data-role=popup]").popup({
-                        dismissible: false,
-                        history: false,
-                        theme: "b",
-                        positionTo: "window",
-                        overlayTheme: "b",
-                        transition: "pop",
-                        beforeposition: function () {
-                            $.mobile.pageContainer.pagecontainer("getActivePage")
-                                .addClass("blur-filter");
-                        },
-                        afterclose: function () {
-                            $(this).remove();
-                            $(".blur-filter").removeClass("blur-filter");
-                        }
-                    }).popup("open");
+                   
+					$('#contactForm')[0].reset();
+					
+					$('#contentTextDiv').html(messageText);
+					
+					var currentUrl = location.href;
+					location.href = "#popup1";
+					history.replaceState(null,null,currentUrl);
+					$('#dimScreen').hide();
+					$('#spinner').hide();
                 }
             });
             return false;
         }
     });
+	
+	var counter = 0;
+	setInterval(function() {
+		var frames=19; var frameWidth = 30;
+		var offset=counter * -frameWidth;
+		document.getElementById("spinner").style.backgroundPosition=
+			 0 + "px" + " " + offset + "px";
+		counter++; if (counter>=frames) counter =0;
+	}, 60);
 });

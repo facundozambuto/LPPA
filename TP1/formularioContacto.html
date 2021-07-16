@@ -9,12 +9,9 @@
         <script type="text/javascript" src="formContact.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script type='text/javascript' src='//code.jquery.com/jquery-1.9.1.js'></script>
-        <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-        <link rel="stylesheet" type="text/css" href="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css">
-        <script type='text/javascript' src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
     </head>
     <body>
+		<div id="dimScreen"></div>
         <nav id="navbarPrincipal" class="tableLayout" role="navigation">
             <div id="navContainerPrincipal" class="tableLayout">
                 <div id="navBarHeader" class="tableLayout clearBothClass">
@@ -28,6 +25,9 @@
                 </div>
             </div>
         </nav>
+		
+		<div id="spinner"></div>
+		
         <div id="containerPrincipalFormularioContacto" class="tableLayout clearBothClass">
             <ul id="breadcrumb"  class="">
                 <li><a href="/">Mini Damas</a></li>
@@ -65,15 +65,16 @@
                 </form>
             </div>
         </div>
-
-        <footer id="footer" class="tableLayout clearBothClass">
-            <div id="containerFooter" class="tableLayout clearBothClass">
-                <div class="row">
-                    <div class="col-md-7">
-                    <p id="footerParragraph"><strong>minidamas.com 2021</strong> - Juega a las damas online - <a href="/contacto.php">Contacto</a></p>
-                    </div>
-                </div>
-            </div>
-        </footer>
+		
+		<div id="popup1" class="overlay">
+			<div class="popup">
+				<h2>Muchas gracias</h2>
+				<a class="close" href="#">&times;</a>
+				<div id="contentTextDiv" class="content">
+					
+				</div>
+			</div>
+		</div>
+		
     </body>
 </html>
