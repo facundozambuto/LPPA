@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		$('#dimScreen').show();
 		$('#spinner').show();
         if (!e.isDefaultPrevented()) {
-            var url = "http://www.partypicapp.com/formContact.php";
+            var url = "https://60f35eed6d44f30017788935.mockapi.io/contacto";
 
             $.ajax({
                 type: "POST",
@@ -11,19 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 crossDomain: true,
                 data: $('#contactForm').serialize(),
                 success: function (data) {
-                    var parsedResponse = JSON.parse(data);
-                    
-                    var messageText = parsedResponse.message;
-                   
-					$('#contactForm')[0].reset();
-					
-					$('#contentTextDiv').html(messageText);
-					
-					var currentUrl = location.href;
-					location.href = "#popup1";
-					history.replaceState(null,null,currentUrl);
-					$('#dimScreen').hide();
-					$('#spinner').hide();
+                    responseHandler(data, true);
+                },
+                error: function(xhr,status,error) {
+                    responseHandler(error, false);
                 }
             });
             return false;
@@ -39,3 +30,14 @@ document.addEventListener('DOMContentLoaded', function() {
 		counter++; if (counter>=frames) counter =0;
 	}, 60);
 });
+
+function responseHandler(data, isSuccess) {
+    var messageText = isSuccess ? "Su consulta ha sido enviada con éxito, en breve será respondida." : "Ha ocurrido un error, comuníquese con el administrador."
+    $('#contactForm')[0].reset();
+    $('#contentTextDiv').html(messageText);
+    var currentUrl = location.href;
+    location.href = "#popup1";
+    history.replaceState(null,null,currentUrl);
+    $('#dimScreen').hide();
+    $('#spinner').hide();
+}
