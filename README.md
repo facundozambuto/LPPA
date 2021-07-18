@@ -60,7 +60,7 @@ El formulario de contacto debe visualizarse correctamente en cualquier dispositi
 Se añaden los archivos formConctact.js, formularioContacto.html y formularioContacto.php.
 Se cumplen con las consignas solicitadas. Se añaden validaciones del lado del cliente para los campos solicitados en las consignas (se validan los campos requeridos -todos- y que el email cumpla con el formato correspondiente). Se añade código necesario en el archivo style.css para el formulario y hacerlo responsive. Se utiliza Ajax y jQuery para realizar la llamada al servidor y algunas funciones con respecto al DOM. Se agrega un spinner para mostrar mientras se realiza la llamada al servidor y luego una vez terminada se oculta. Se intentó que el formulario envié realmente un correo a mi inbox personal con la consulta pero como el código PHP está alojado en un hosting personal (http://www.partypicapp.com) sin SSL, hay un MIX CONTENT ERROR en GitHub pages ya que la petición se quiere hacer desde un sitio con protocolo HTTPS hacia uno HTTP. Por esta razón, he creado un endpoint random que devuelve un 200 OK para simular dicha petición. Puede verse el código PHP para el envío de email.
 
-![Alt Text](https://gifyu.com/image/B5iN)
+![Alt Text](https://media.giphy.com/media/1yoEGwbWgKTseKVLxV/giphy.gif)
 
 
 ## A mejorar 🛠️
