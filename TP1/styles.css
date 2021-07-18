@@ -486,6 +486,24 @@ input[type=submit] {
     width: 100%;
     margin-top: 0;
   }
+
+  input[type=email] {
+    width: 100%;
+  }
+
+  #containerPrincipalFormularioContacto {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  input[type=email] {
+    width: 100%;
+  }
+
+  #containerPrincipalFormularioContacto {
+    width: 100%;
+  }
 }
 
 .overlay {

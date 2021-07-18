@@ -227,11 +227,11 @@ function realizarMovimiento(filaFicha, columnaFicha, filaCelda, columnaCelda, co
 
 function esDeAvance(filaFicha, filaCelda, colorFicha) {
     if (colorFicha === 'blanca') {
-        if (filaFicha < filaCelda) {
+        if (filaCelda === (filaFicha + 60) || filaCelda === (filaFicha + 120)) {
             return true
         }
     } else if (colorFicha === 'roja') {
-        if (filaFicha > filaCelda) {
+        if (filaCelda === (filaFicha - 60) || filaCelda === (filaFicha - 120)) {
             return true
         }
     }
