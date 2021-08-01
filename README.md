@@ -2,7 +2,8 @@
 
 Trabajo práctico "Mini Damas". 
 
-Para acceder: https://facundozambuto.github.io/LPPA/TP1/index.html 📌
+Para acceder: [go](https://facundozambuto.github.io/LPPA/TP1/index.html ){:target="_blank" rel="noopener"}📌
+
 
 ![Alt Text](https://media.giphy.com/media/kTHvm5ZApOvcAin3G4/giphy.gif)
 
