@@ -1,8 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() { 
+document.addEventListener('DOMContentLoaded', function() {
 
-    localStorage.setItem("turno", "jugadorUno");
-
-    localStorage.setItem("tablaDePosiciones", JSON.stringify([{'jugador': 1, 'puntos': 0}, {'jugador': 2, 'puntos': 0}]));
+    location.href = "#popupJugadores";
 
     //Renderiza el tablero
     for(i=0; i<8; i++) {
@@ -202,6 +200,9 @@ document.addEventListener('DOMContentLoaded', function() {
         elements[i].addEventListener('click', validarCasilleroVacio, false);
     }
 
+    var btnJugadores = document.getElementById('btnJugadores');
+
+    btnJugadores.addEventListener('click', validarJugadoresYComenzar, false);
 
 }, false);
 
@@ -289,3 +290,59 @@ function validarGanador() {
         }
     });
 }
+
+function validarJugadoresYComenzar() {
+    if ($("#jugadorUnoForm").val() === '' || $("#jugadorUnoForm").val() === undefined || $("#jugadorUnoForm").val() === null ||
+        $("#jugadorDosForm").val() === '' || $("#jugadorDosForm").val() === undefined || $("#jugadorDosForm").val() === null) {
+        var mensajeError = document.getElementById('mensajeErrorJugadores');
+        mensajeError.style.display = 'block';
+    } else {
+        var nombreJugadorUno = $("#jugadorUnoForm").val();
+        var nombreJugadorDos = $("#jugadorDosForm").val();
+        $("#turnoJugadorUno").html('TURNO DE ' + nombreJugadorUno);
+        $("#turnoJugadorDos").html('TURNO DE ' + nombreJugadorDos);
+        localStorage.setItem("turno", "jugadorUno");
+        localStorage.setItem("tablaDePosiciones", JSON.stringify([{'jugador': 1, 'puntos': 0, 'nombreJugador': nombreJugadorUno}, {'jugador': 2, 'puntos': 0, 'nombreJugador':nombreJugadorDos}]));
+        
+        $("#popupJugadores").hide();
+    }
+}
+
+function openPopupPartidas() {
+    location.href = "#popupPartidas";
+}
+
+function cerrarPopupPartidas() {
+    $("#popupPartidas").hide();
+}
+
+var dataSet = [
+    [ "Alberto", 12, "Victoria", 8, "12/07/2021"],
+    [ "Angélica", 7, "Ramón", 12, "12/07/2021"],
+    [ "Raúl", 7, "Claudia", 12, "13/07/2021"],
+    [ "Gustavo", 12, "Tomás", 12, "13/07/2021"],
+    [ "Franco", 3, "Tobías", 12, "13/07/2021"],
+    [ "Josefina", 7, "Valentina", 12, "19/07/2021"],
+    [ "Matías", 9, "Liliana", 12, "22/07/2021"],
+    [ "Clelia", 4, "Pablo", 12, "25/07/2021"],
+    [ "Lautaro", 7, "Romina", 12, "25/07/2021"],
+    [ "Julio", 12, "Nicolás", 10, "26/07/2021"],
+    [ "Roberto", 5, "Simón", 12, "28/07/2021"],
+    [ "Juan", 7, "Laura", 12, "30/07/2021"]
+];
+ 
+$(document).ready(function() {
+    $('#tablaJugadores').DataTable({
+        data: dataSet,
+        columns: [
+            { title: "Jugador 1" },
+            { title: "Puntos J1" },
+            { title: "Jugador 2" },
+            { title: "Puntos J2." },
+            { title: "Fecha" }
+        ],
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' 
+        }
+    });
+});

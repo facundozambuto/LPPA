@@ -262,8 +262,48 @@ h1 > a {
   margin-bottom: 10px;
 }
 
+#buttonContainerFinishedButton {
+  margin-bottom: 10px;
+}
+
 .text-center {
   text-align: center;
+}
+
+#finishedGameButton {
+  background: -webkit-gradient(linear,center bottom,center top,from(#3d94d1),to(#57aeea));
+  background-color: lightBlue;
+  display: inline-block;
+  font-size: 21px;
+  margin-top: 20px;
+  padding: 10px 45px;
+  vertical-align: middle;
+  font-family: Arial;
+  color: #fff;
+  border: 1px solid #84C5F3;
+  text-shadow: 0 0 3px #333333;
+  cursor: pointer;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 0 8px 1px #888888;
+  -webkit-border-radius: 12px;
+}
+
+#closeGamesButton {
+  background: -webkit-gradient(linear,center bottom,center top,from(#3d94d1),to(#57aeea));
+  background-color: lightBlue;
+  display: inline-block;
+  font-size: 21px;
+  margin-top: 20px;
+  padding: 10px 45px;
+  vertical-align: middle;
+  font-family: Arial;
+  color: #fff;
+  border: 1px solid #84C5F3;
+  text-shadow: 0 0 3px #333333;
+  cursor: pointer;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 0 8px 1px #888888;
+  -webkit-border-radius: 12px;
 }
 
 #newGameButton {
@@ -564,7 +604,6 @@ input[type=submit] {
   }
 }
 
-
 #spinner {
   width: 80px;
   height: 80px;
@@ -597,3 +636,11 @@ input[type=submit] {
     opacity: 1;
 	display: none;
 }
+
+#mensajeErrorJugadores {
+  color: red;
+  font-size: 14px;
+  font-style: italic;
+}
+
+tr.odd, tr.even > td { text-align: center; }
