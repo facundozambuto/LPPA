@@ -35,41 +35,54 @@
             <div id="rowTableContainer" class="tableLayout">
                 <div class="col-md-12">
                     <div id="divTable">
+
                         <div id="contenedorDamas">
                             <div id="tableroDamas">
                                 
                             </div>
-                            <div id="buttonContainer" class="text-center">
-                                <div id="newGameButton" onClick="window.location.reload();">
-                                    Nueva partida
-                                </div>
-                            </div>
-                            <div id="buttonContainerFinishedButton" class="text-center">
-                                <div id="finishedGameButton" onClick="openPopupPartidas();">
-                                    Ver partidas finalizadas
-                                </div>
+                            
+                            <div id="divPuntos">
+                                Puntuación
+                                <p id="puntosJugadorUno"></p>
+                                <p id="puntosJugadorDos"></p>
                             </div>
                         </div>
+
+
+                        <div id="buttonContainer" class="text-center">
+                            <div class="row" id="jugadorUno">
+                                <div class="col-md-12 borderTurnoPadre">
+                                    <div class="fondoGris borderTurnoUno">
+                                        <strong><p id="turnoJugadorUno"></p></strong>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="row" id="jugadorDos">
+                                <div class="col-md-12 borderTurnoPadre">
+                                    <div class="fondoGris borderTurnoDos">
+                                        <strong><p id="turnoJugadorDos"></p></strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="newGameButton" onClick="window.location.reload();">
+                                Nueva partida
+                            </div>
+                            <div id="finishedGameButton" onClick="openPopupPartidas();">
+                                Ver partidas finalizadas
+                            </div>
+                            <div id="saveGameButton" onClick="guardarPartida();">
+                                Guardar Partida
+                            </div>
+                            <div id="loadGameButton" onClick="openPopupPartidasGuardadas(false);">
+                                Cargar Partida
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
-
-            <div class="row" id="jugadorUno">
-                <div class="col-md-12 borderTurnoPadre">
-                    <div class="fondoGris borderTurnoUno">
-                        <strong><p id="turnoJugadorUno"></p></strong>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" id="jugadorDos">
-                <div class="col-md-12 borderTurnoPadre">
-                    <div class="fondoGris borderTurnoDos">
-                        <strong><p id="turnoJugadorDos"></p></strong>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <div id="popupPartidas" class="overlay">
@@ -77,6 +90,19 @@
                 <table id="tablaJugadores" class="display" width="100%"></table>
                 <div id="closeGamesButton" onClick="cerrarPopupPartidas();">
                     Cerrar
+                </div>
+            </div>
+        </div>
+
+        <div id="popupPartidasGuardadas" class="overlay">
+            <div class="popup">
+                <div id="divSinPartidasGuardadas">
+                    <p>No hay partidas guardadas aún.</p>
+                </div>
+
+                <table id="tablaPartidasGuardadas" class="display" width="100%"></table>
+                <div id="closeSavedGamesButton" onClick="cerrarPopupPartidasGuardadas();">
+                    Cancelar
                 </div>
             </div>
         </div>
@@ -105,21 +131,12 @@
                     <div id="mensajeErrorJugadores" style="display: none">
                         <p>Los datos proporcionados no son correctos.</p>
                     </div>
-                    <div class="row">
+                    <div class="row" style="padding-top: 15px";>
+                        <div id="btnCargarPartidas" onclick="openPopupPartidasGuardadas(true);">Cargar Partida</div>
                         <input id="btnJugadores" type="submit" value="Comenzar">
                     </div>
 				</div>
 			</div>
 		</div>
-
-        <footer id="footer" class="tableLayout clearBothClass">
-            <div id="containerFooter" class="tableLayout clearBothClass">
-                <div class="row">
-                    <div class="col-md-7">
-                    <p id="footerParragraph"><strong>minidamas.com 2021</strong> - Juega a las damas online - <a href="/contacto.php">Contacto</a></p>
-                    </div>
-                </div>
-            </div>
-        </footer>
     </body>
 </html>
