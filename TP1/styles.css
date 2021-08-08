@@ -20,7 +20,7 @@ body {
 #navbarPrincipal {
   padding-right: 0;
   padding-left: 0;
-  background-color: #D4707A;
+  background-color: #662938!important;
   border-radius: 0;
   z-index: 1000;
   border-width: 0 0 1px;
@@ -548,7 +548,7 @@ label {
 }
 
 input[type=submit] {
-  background-color: #04AA6D;
+  background-color: #662938!important;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -721,7 +721,7 @@ input[type=submit] {
 
 #btnCargarPartidas {
   float: left;
-  background-color: rgb(4, 170, 109);
+  background-color: #662938!important;
   color: white;
   cursor: pointer;
   padding: 12px 20px;

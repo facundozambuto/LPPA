@@ -1,20 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-
-    location.href = "#popupJugadores";
-
-    //Renderiza el tablero
-    renderizarTablero();
-    
-    //Renderiza las fichas
-    rendirizarFichas();
-
-    agregarListeners();
-    
-    var btnJugadores = document.getElementById('btnJugadores');
-    btnJugadores.addEventListener('click', validarJugadoresYComenzar, false);
-
-}, false);
-
 function realizarMovimiento(filaFicha, columnaFicha, filaCelda, columnaCelda, colorFicha) {
     var ficha = document.querySelectorAll('div.ficha.' + colorFicha + '[columna=' + '"' + columnaFicha + '"' + '][fila=' + '"' + filaFicha + '"' + ']');
 
@@ -68,8 +51,6 @@ function estaComiendo(columnaFicha, columnaCelda, filaFicha, filaCelda, colorFic
             filaCelda = filaCelda - 60;
         }
 
-        //filaCelda = colorFicha === 'blanca' ? filaCelda - 60 : filaCelda + 60;
-        
         columnaCelda = columnaFicha + 120 === columnaCelda ? columnaCelda - 60 : columnaCelda + 60;
 
         var ficha = document.querySelectorAll('div.ficha.' + colorFichaRival + '[columna=' + '"' + columnaCelda + '"' + '][fila=' + '"' + filaCelda + '"' + ']');
@@ -167,13 +148,34 @@ function actualizarPosiciones(colorFicha) {
 }
 
 function validarGanador() {
-    var tablero = JSON.parse(localStorage.getItem('tablaDePosiciones'));
+    if ($(".ficha.blanca").length === 1 && $(".ficha.roja").length === 1) {
+        declararEmpate();
+    }
 
-    tablero.forEach(x => {
-        if (x.puntos === 12) {
-            alert('GANADOR JUGADOR ' + x.jugador);
+    var partidasFinalizadas = JSON.parse(localStorage.getItem('partidasFinalizadas'));
+    var tablaDePosiciones = JSON.parse(localStorage.getItem('tablaDePosiciones'));
+
+    if ($(".ficha.blanca").length === 0 || $(".ficha.roja").length === 0) {
+        partidasFinalizadas.push(
+            [
+                tablaDePosiciones[0].nombreJugador,
+                tablaDePosiciones[0].puntos,
+                tablaDePosiciones[1].nombreJugador,
+                tablaDePosiciones[1].puntos,
+                new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear()
+            ]
+        )
+
+        if ($(".ficha.blanca").length === 0) {
+            alert("¡" + tablaDePosiciones[1].nombreJugador + " ha sido el ganador!")
+        } else {
+            alert("¡" + tablaDePosiciones[0].nombreJugador + " ha sido el ganador!")
         }
-    });
+    }
+}
+
+function declararEmpate () {
+    alert("No hay más movimientos posibles. La partida ha quedado empatada.")
 }
 
 function validarJugadoresYComenzar() {
@@ -210,7 +212,6 @@ function openPopupPartidasGuardadas(isNewGameFormBtn) {
 }
 
 function cerrarPopupPartidasGuardadas() {
-
     $("#divSinPartidasGuardadas").hide();
     $("#popupPartidasGuardadas").hide();
     
@@ -453,7 +454,11 @@ function agregarListenerCasilleroVacio() {
                             jugadorUno.style.display = 'none';
                             jugadorDos.style.display = 'block';
                             
-                            validarGanador();
+                            if (hayDisponibilidadDeMovimientos()) {
+                                validarGanador();
+                            } else {
+                                declararEmpate();
+                            }
                         }
                     }
                 }
@@ -561,6 +566,56 @@ function actualizarTurno() {
     }
 }
 
+function hayDisponibilidadDeMovimientos() {
+    var hayDisponibilidad = false;
+    $(".ficha").each(function() {
+        if ($(this).hasClass('blanca') && !$(this).hasClass('damaBlanca')) {
+            var columnaFichaIzq = parseInt($(this).attr('columna')) - 60;
+            var columnaFichaDer = parseInt($(this).attr('columna')) + 60;
+            var filaFicha = parseInt($(this).attr('fila')) + 60;
+
+            if (document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaFichaDer + '"' + '][fila=' + '"' + filaFicha + '"' + '][ocupada="false"]').length > 0
+             || document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaFichaIzq + '"' + '][fila=' + '"' + filaFicha + '"' + '][ocupada="false"]').length > 0) {
+                hayDisponibilidad = true;
+                return false;
+            }
+        }
+
+        if ($(this).hasClass('roja') && !$(this).hasClass('dameRoja')) {
+            var columnaFichaIzq = parseInt($(this).attr('columna')) - 60;
+            var columnaFichaDer = parseInt($(this).attr('columna')) + 60;
+            var filaFicha = parseInt($(this).attr('fila')) - 60;
+
+            if (document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaFichaDer + '"' + '][fila=' + '"' + filaFicha + '"' + '][ocupada="false"]').length > 0
+             || document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaFichaIzq + '"' + '][fila=' + '"' + filaFicha + '"' + '][ocupada="false"]').length > 0) {
+                hayDisponibilidad = true;
+                return false;
+            }
+        }
+
+        if ($(this).hasClass('blanca') && $(this).hasClass('damaBlanca') || $(this).hasClass('roja') && $(this).hasClass('damaRoja')) {
+            var columnaFichaIzq = parseInt($(this).attr('columna')) - 60;
+            var columnaFichaDer = parseInt($(this).attr('columna')) + 60;
+            var filaFichaAbajo = parseInt($(this).attr('fila')) + 60;
+            var filaFichaArriba = parseInt($(this).attr('fila')) - 60;
+
+            if (document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaFichaDer + '"' + '][fila=' + '"' + filaFichaAbajo + '"' + '][ocupada="false"]').length > 0
+             || document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaFichaDer + '"' + '][fila=' + '"' + filaFichaArriba + '"' + '][ocupada="false"]').length > 0
+             || document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaFichaIzq + '"' + '][fila=' + '"' + filaFichaAbajo + '"' + '][ocupada="false"]').length > 0
+             || document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaFichaIzq + '"' + '][fila=' + '"' + filaFichaArriba + '"' + '][ocupada="false"]').length > 0) {
+                hayDisponibilidad = true;
+                return false;
+            }
+        }
+    });
+    
+    if (hayDisponibilidad) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function generarIdRandom(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -571,8 +626,7 @@ function generarIdRandom(length) {
     return result;
 }
 
-$(document).ready(function() {
-    
+function cargarPartidasFinalizadas() {
     var dataSet = [
         [ "Alberto", 12, "Victoria", 8, "12/07/2021"],
         [ "Angélica", 7, "Ramón", 12, "12/07/2021"],
@@ -587,6 +641,8 @@ $(document).ready(function() {
         [ "Roberto", 5, "Simón", 12, "28/07/2021"],
         [ "Juan", 7, "Laura", 12, "30/07/2021"]
     ];
+
+    localStorage.setItem('partidasFinalizadas', JSON.stringify(dataSet));
  
     $('#tablaJugadores').DataTable({
         data: dataSet,
@@ -604,5 +660,17 @@ $(document).ready(function() {
             url: 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json' 
         }
     });
+}
+
+$(document).ready(function() {
+    location.href = "#popupJugadores";
+    //Renderiza el tablero
+    renderizarTablero();
+    //Renderiza las fichas
+    rendirizarFichas();
+    agregarListeners();
+    var btnJugadores = document.getElementById('btnJugadores');
+    btnJugadores.addEventListener('click', validarJugadoresYComenzar, false);
+    cargarPartidasFinalizadas();
     actualizarTablaPartidasGuardadas();
 });
