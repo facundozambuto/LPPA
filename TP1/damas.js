@@ -16,9 +16,12 @@ document.addEventListener('DOMContentLoaded', function() {
 }, false);
 
 function realizarMovimiento(filaFicha, columnaFicha, filaCelda, columnaCelda, colorFicha) {
-     if (esDeAvance(filaFicha, filaCelda, colorFicha)) {
-        if (estaComiendo(columnaFicha, columnaCelda, filaFicha, filaCelda, colorFicha) || esValido(columnaFicha, columnaCelda)) {
-            var ficha = document.querySelectorAll('div.ficha.' + colorFicha + '[columna=' + '"' + columnaFicha + '"' + '][fila=' + '"' + filaFicha + '"' + ']');
+    var ficha = document.querySelectorAll('div.ficha.' + colorFicha + '[columna=' + '"' + columnaFicha + '"' + '][fila=' + '"' + filaFicha + '"' + ']');
+
+    var esDama = ficha[0].attributes["esDama"].value === 'true';
+
+    if (esDeAvance(filaFicha, filaCelda, colorFicha)) {
+        if (estaComiendo(columnaFicha, columnaCelda, filaFicha, filaCelda, colorFicha, esDama) || esValido(columnaFicha, columnaCelda)) {
             celdaActual = document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaFicha + '"' + '][fila=' + '"' + filaFicha + '"' + ']');
             celdaActual[0].attributes["ocupada"].value = false;
             celdaNueva = document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaCelda + '"' + '][fila=' + '"' + filaCelda + '"' + ']');
@@ -28,11 +31,21 @@ function realizarMovimiento(filaFicha, columnaFicha, filaCelda, columnaCelda, co
             ficha[0].style.setProperty("top", filaCelda + 'px');
             ficha[0].style.setProperty("left", columnaCelda + 'px');
 
+            if (alcanzaBordeEnemigo(colorFicha, filaCelda)) {
+                ficha[0].attributes["esDama"].value = true;
+                if (colorFicha === 'roja') {
+                    ficha[0].classList.add('damaRoja');
+                } else {
+                    ficha[0].classList.add('damaBlanca');
+                }
+            }
+
             return true;
         }
         return false
     }
     return false;
+    
 }
 
 function esDeAvance(filaFicha, filaCelda, colorFicha) {
@@ -55,10 +68,24 @@ function esValido(columnaFicha, columnaCelda) {
     return false;
 }
 
-function estaComiendo(columnaFicha, columnaCelda, filaFicha, filaCelda, colorFicha) {
+function estaComiendo(columnaFicha, columnaCelda, filaFicha, filaCelda, colorFicha, esDama) {
     if (columnaFicha + 120 == columnaCelda || columnaFicha - 120 == columnaCelda) {
         var colorFichaRival = colorFicha === 'blanca' ? 'roja' : 'blanca';
-        filaCelda = colorFicha === 'blanca' ? filaCelda - 60 : filaCelda + 60;
+
+        if (colorFicha === 'blanca' && !esDama) {
+            filaCelda = filaCelda - 60;
+        }
+        if (colorFicha === 'roja' && !esDama) {
+            filaCelda = filaCelda + 60;
+        }
+        if (colorFicha === 'blanca' && esDama) {
+            filaCelda = filaCelda + 60;
+        }
+        if (colorFicha === 'roja' && esDama) {
+            filaCelda = filaCelda - 60;
+        }
+
+        //filaCelda = colorFicha === 'blanca' ? filaCelda - 60 : filaCelda + 60;
         
         columnaCelda = columnaFicha + 120 === columnaCelda ? columnaCelda - 60 : columnaCelda + 60;
 
@@ -74,6 +101,16 @@ function estaComiendo(columnaFicha, columnaCelda, filaFicha, filaCelda, colorFic
         }
     }
     return false;
+}
+
+function alcanzaBordeEnemigo(colorFicha, filaCelda) {
+    if (colorFicha === 'blanca' && filaCelda === 420) {
+        return true;
+    }
+
+    if (colorFicha === 'roja' && filaCelda === 0) {
+        return true;
+    }
 }
 
 function actualizarTablaDePosiciones() {
@@ -248,8 +285,6 @@ function cargarPartida(idPartida) {
     var partidasGuardadas = JSON.parse(localStorage.getItem('partidasGuardadas'));
 
     var index = partidasGuardadas.findIndex(partida => partida.idPartida === idPartida);
-
-    console.log(partidasGuardadas[index]);
 
     if (index !== -1) {
         localStorage.setItem('idPartida', idPartida);
@@ -488,6 +523,7 @@ function rendirizarFichas() {
                     ficha.style.setProperty("left", j == 0 ? 0 + 'px' : j * 60 +'px');
                     ficha.setAttribute('fila', i*60);
                     ficha.setAttribute('columna', j == 0 ? 0  : j * 60);
+                    ficha.setAttribute('esDama', false);
                     document.getElementById('tableroDamas').appendChild(ficha);
                 }
 
@@ -499,6 +535,7 @@ function rendirizarFichas() {
                     ficha.style.setProperty("left", j * 60 + 'px');
                     ficha.setAttribute('fila', i == 0 ? 0 : i * 60);
                     ficha.setAttribute('columna', j * 60);
+                    ficha.setAttribute('esDama', false);
                     document.getElementById('tableroDamas').appendChild(ficha);
                 }
             }
@@ -521,7 +558,6 @@ function actualizarTurno() {
     }
 }
 
-
 function generarIdRandom(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -531,7 +567,6 @@ function generarIdRandom(length) {
     }
     return result;
 }
-
 
 $(document).ready(function() {
     

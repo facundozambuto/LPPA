@@ -734,4 +734,13 @@ input[type=submit] {
   height: 15px;
 }
 
+.damaRoja {
+  background-image: url(DamaRoja.png) !important;
+}
+
+.damaBlanca {
+  background-image: url(DamaBlanca.png) !important;
+}
+
+
 tr.odd, tr.even > td { text-align: center; }
