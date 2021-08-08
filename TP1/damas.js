@@ -20,32 +20,15 @@ function realizarMovimiento(filaFicha, columnaFicha, filaCelda, columnaCelda, co
 
     var esDama = ficha[0].attributes["esDama"].value === 'true';
 
-    if (esDeAvance(filaFicha, filaCelda, colorFicha)) {
+    if (esDeAvance(filaFicha, filaCelda, colorFicha) || esDama) {
         if (estaComiendo(columnaFicha, columnaCelda, filaFicha, filaCelda, colorFicha, esDama) || esValido(columnaFicha, columnaCelda)) {
-            celdaActual = document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaFicha + '"' + '][fila=' + '"' + filaFicha + '"' + ']');
-            celdaActual[0].attributes["ocupada"].value = false;
-            celdaNueva = document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaCelda + '"' + '][fila=' + '"' + filaCelda + '"' + ']');
-            celdaNueva[0].attributes["ocupada"].value = true;
-            ficha[0].attributes["columna"].value = columnaCelda;
-            ficha[0].attributes["fila"].value = filaCelda;
-            ficha[0].style.setProperty("top", filaCelda + 'px');
-            ficha[0].style.setProperty("left", columnaCelda + 'px');
-
-            if (alcanzaBordeEnemigo(colorFicha, filaCelda)) {
-                ficha[0].attributes["esDama"].value = true;
-                if (colorFicha === 'roja') {
-                    ficha[0].classList.add('damaRoja');
-                } else {
-                    ficha[0].classList.add('damaBlanca');
-                }
-            }
-
+            actualizarFichaYCelda(columnaFicha, columnaCelda, filaFicha, filaCelda, colorFicha, ficha, esDama);
             return true;
         }
         return false
     }
+
     return false;
-    
 }
 
 function esDeAvance(filaFicha, filaCelda, colorFicha) {
@@ -101,6 +84,26 @@ function estaComiendo(columnaFicha, columnaCelda, filaFicha, filaCelda, colorFic
         }
     }
     return false;
+}
+
+function actualizarFichaYCelda(columnaFicha, columnaCelda, filaFicha, filaCelda, colorFicha, ficha, esDama) {
+    celdaActual = document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaFicha + '"' + '][fila=' + '"' + filaFicha + '"' + ']');
+    celdaActual[0].attributes["ocupada"].value = false;
+    celdaNueva = document.querySelectorAll('div.celda.celdaNegra' + '[columna=' + '"' + columnaCelda + '"' + '][fila=' + '"' + filaCelda + '"' + ']');
+    celdaNueva[0].attributes["ocupada"].value = true;
+    ficha[0].attributes["columna"].value = columnaCelda;
+    ficha[0].attributes["fila"].value = filaCelda;
+    ficha[0].style.setProperty("top", filaCelda + 'px');
+    ficha[0].style.setProperty("left", columnaCelda + 'px');
+
+    if (alcanzaBordeEnemigo(colorFicha, filaCelda) && !esDama) {
+        ficha[0].attributes["esDama"].value = true;
+        if (colorFicha === 'roja') {
+            ficha[0].classList.add('damaRoja');
+        } else {
+            ficha[0].classList.add('damaBlanca');
+        }
+    }
 }
 
 function alcanzaBordeEnemigo(colorFicha, filaCelda) {
