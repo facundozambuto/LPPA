@@ -164,7 +164,7 @@ function validarGanador() {
                 tablaDePosiciones[1].puntos,
                 new Date().getDate() + "/" + (new Date().getMonth() + 1) + "/" + new Date().getFullYear()
             ]
-        )
+        );
 
         if ($(".ficha.blanca").length === 0) {
             alert("¡" + tablaDePosiciones[1].nombreJugador + " ha sido el ganador!")
@@ -451,6 +451,8 @@ function agregarListenerCasilleroVacio() {
                             targetElement.classList.remove('selected');
                             const jugadorUno = document.getElementById('jugadorUno');
                             const jugadorDos = document.getElementById('jugadorDos');
+                            $("#puntosJugadorUno").removeClass("colorTurno");
+                            $("#puntosJugadorDos").addClass("colorTurno");
                             jugadorUno.style.display = 'none';
                             jugadorDos.style.display = 'block';
                             
@@ -478,6 +480,8 @@ function agregarListenerCasilleroVacio() {
                             targetElement.classList.remove('selected');
                             const jugadorUno = document.getElementById('jugadorUno');
                             const jugadorDos = document.getElementById('jugadorDos');
+                            $("#puntosJugadorUno").addClass("colorTurno");
+                            $("#puntosJugadorDos").removeClass("colorTurno");
                             jugadorUno.style.display = 'block';
                             jugadorDos.style.display = 'none';
 
@@ -558,11 +562,15 @@ function actualizarTurno() {
     if (localStorage.getItem('turno') === 'jugadorUno') {
         $("#jugadorUno").show();
         $("#jugadorDos").hide();
+        $("#puntosJugadorUno").addClass("colorTurno");
+        $("#puntosJugadorDos").removeClass("colorTurno");
     }
 
     if (localStorage.getItem('turno') === 'jugadorDos') {
         $("#jugadorUno").hide();
         $("#jugadorDos").show();
+        $("#puntosJugadorUno").addClass("colorTurno");
+        $("#puntosJugadorDos").removeClass("colorTurno");
     }
 }
 
@@ -664,9 +672,7 @@ function cargarPartidasFinalizadas() {
 
 $(document).ready(function() {
     location.href = "#popupJugadores";
-    //Renderiza el tablero
     renderizarTablero();
-    //Renderiza las fichas
     rendirizarFichas();
     agregarListeners();
     var btnJugadores = document.getElementById('btnJugadores');

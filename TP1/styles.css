@@ -37,6 +37,10 @@ body {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap
 }
 
 #navBarHeader {
@@ -260,6 +264,7 @@ h1 > a {
 
 #buttonContainer {
   margin-bottom: 10px;
+  margin-top: 10%;
 }
 
 #buttonContainerFinishedButton {
@@ -547,7 +552,7 @@ label {
   display: inline-block;
 }
 
-input[type=submit] {
+input[type=submit], input[type=button] {
   background-color: #662938!important;
   color: white;
   padding: 12px 20px;
@@ -585,6 +590,12 @@ input[type=submit] {
   .col-25, .col-75, input[type=submit] {
     width: 100%;
     margin-top: 0;
+  }
+
+  .col-25, .col-75, input[type=button] {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 15px;
   }
 
   input[type=email] {
@@ -720,18 +731,7 @@ input[type=submit] {
 }
 
 #btnCargarPartidas {
-  float: left;
-  background-color: #662938!important;
-  color: white;
-  cursor: pointer;
-  padding: 12px 20px;
-  border-width: initial;
-  border-style: none;
-  border-color: initial;
-  border-image: initial;
-  border-radius: 4px;
-  font-size: 13.33px;
-  height: 15px;
+  float: left !important;
 }
 
 .damaRoja {
@@ -744,3 +744,133 @@ input[type=submit] {
 
 
 tr.odd, tr.even > td { text-align: center; }
+
+
+@media screen and (max-width: 1050px) {
+  #containerPrincipalDamas {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    box-sizing: border-box;
+    display: block;
+  }
+
+  #rowTableContainer {
+    margin-left: 0%;
+  }
+
+  .col-md-12 {
+    width: 100%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-left: 0px;
+  }
+
+  #divTable {
+    align-items: initial;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  #contenedorDamas {
+    width: 480px;
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #tableroDamas {
+    border: none;
+    width: 100%;
+    position: relative;
+    z-index: 0;
+    /* transform: scale(0.7); */
+    margin-top: 0;
+    height: 100%;
+  }
+
+  #divPuntos {
+    text-align: center;
+    font-size: 1.5em;
+    margin-top: 0;
+  }
+
+  #buttonContainer {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 70%;
+    position: relative;
+    text-align: center;
+    margin-top: 0;
+  }
+
+  p {
+    display: block;
+    margin-block-start: 0.25em;
+    margin-block-end: 0.25em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+  }
+
+  #buttonContainer {
+    margin-top: 0%;
+  }
+
+  #jugadorUno, #jugadorDos {
+    display: none !important;
+  }
+
+  #navbarPrincipal > #navContainerPrincipal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-left: 0px;
+  }
+
+  .colorTurno {
+    color: red;
+    font-style: italic;
+    font-size: 1em;
+  }
+}
+
+@media screen and (min-width: 1050px) and (max-width: 1650px){
+  #divTable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap
+  }
+
+  #buttonContainer {
+    margin-bottom: 10px;
+    margin-top: 10%;
+  }
+
+  #contenedorDamas {
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+  }
+  
+  #containerPrincipalDamas {
+    width: 100%;
+  }
+
+  #navbarPrincipal > #navContainerPrincipal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding-left: 0px;
+  }
+}
+

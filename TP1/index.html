@@ -21,30 +21,28 @@
                 </div>
                 <div id="navBarBody" class="">
                     <ul id="unOrderListNav">
-                        <li><a href="https://www.miuai.com.ar" title="Damas online">Ingeniería en Sistemas - 4to año - Examen Final LPPA - Facundo Zambuto - </a></li>
+                        <li><a href="https://www.miuai.com.ar" title="Damas online">Facundo Zambuto</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
         <div id="containerPrincipalDamas" class="tableLayout clearBothClass">
-            <ul id="breadcrumb"  class="">
-                <li><a href="/">Mini Damas</a></li>
-                <li class="activeLi">Portada</li>
-            </ul>
             <div id="rowTableContainer" class="tableLayout">
                 <div class="col-md-12">
                     <div id="divTable">
 
                         <div id="contenedorDamas">
+                            
+                            <div id="divPuntos">
+                                Puntuación
+                                <p id="puntosJugadorUno" class="colorTurno"></p>
+                                <p id="puntosJugadorDos"></p>
+                            </div>
+
                             <div id="tableroDamas">
                                 
                             </div>
                             
-                            <div id="divPuntos">
-                                Puntuación
-                                <p id="puntosJugadorUno"></p>
-                                <p id="puntosJugadorDos"></p>
-                            </div>
                         </div>
 
 
@@ -131,7 +129,7 @@
                         <p>Los datos proporcionados no son correctos.</p>
                     </div>
                     <div class="row" style="padding-top: 15px";>
-                        <div id="btnCargarPartidas" onclick="openPopupPartidasGuardadas(true);">Cargar Partida</div>
+                        <input id="btnCargarPartidas" type="button" value="Cargar Partida" onclick="openPopupPartidasGuardadas(true);"/>
                         <input id="btnJugadores" type="submit" value="Comenzar">
                     </div>
 				</div>
